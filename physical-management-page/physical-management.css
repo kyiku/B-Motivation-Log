@@ -1,0 +1,23 @@
+#unwell-data{
+    display: none;
+    flex-direction: column;
+}
+
+#unwell-data label {
+    vertical-align: top;
+}
+
+#reason-unwell {
+    resize: vertical;
+    overflow: auto;
+}
+
+.form-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 300px;
+    margin: right;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center; 
+}
