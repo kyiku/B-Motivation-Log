@@ -35,7 +35,8 @@ body {
     background-color: #d6fff7;
 }
 
-.form-container label {
+.form-container label,
+.form-container span {
     flex: 0 0 200px;
     margin-right: 10px;
     font-size: 24px;
