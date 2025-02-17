@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日誌の入力</title>
-    <script src="diary.js" defer></script>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(to bottom, #000000de, #434343);
+            background: linear-gradient(to bottom, #FFC0CB, #FFB6C1);
             margin: 0;
             padding: 0;
+            padding-top: 20px; /* 上部に余白を追加 */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* 上部に配置 */
             height: 100vh;
         }
 
         h1 {
             color: #FF69B4;
             font-size: 2.5em;
+            margin-bottom: 20px; /* 下に余白を追加 */
         }
 
         form {
-            background-color: #FFF0F5;
+            background-color: #FFE4E1;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
             border: 2px solid #FFB6C1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         label {
@@ -37,6 +41,7 @@
             margin-bottom: 8px;
             font-weight: bold;
             color: #FF69B4;
+            width: 100%;
         }
 
         input[type="date"],
@@ -49,6 +54,10 @@
             border: 2px solid #FFB6C1;
             border-radius: 10px;
             background-color: #FFF0F5;
+        }
+
+        textarea {
+            resize: none; /* テキストエリアのリサイズ機能を無効にする */
         }
 
         input[type="submit"] {
