@@ -1,121 +1,101 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const dateInput = document.getElementById('date');
-    const dateLabel = document.querySelector('label[for="date"]');
-    
-    if (!dateInput.value) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.value = today;
-    }
+// filepath: /workspaces/B-Motivation-Log/script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('health-log-form');
+    const entriesList = document.getElementById('entries-list');
+    const searchButton = document.getElementById('search-button');
+    const searchResults = document.getElementById('search-results');
 
-    dateLabel.addEventListener('click', function() {
-        dateInput.focus();
-        dateInput.click(); // カレンダーを開く
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const date = document.getElementById('date').value;
+        const condition = document.getElementById('condition').value;
+        const motivation = document.getElementById('motivation').value;
+        const notes = document.getElementById('notes').value;
+
+        const data = {
+            date,
+            condition,
+            motivation,
+            notes
+        };
+
+        let logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
+        logs.push(data);
+        localStorage.setItem('healthLogs', JSON.stringify(logs));
+
+        alert('データが保存されました');
+        displayLogs();
     });
 
-    dateInput.addEventListener('click', function() {
-        dateInput.showPicker(); // カレンダーを開く
-    });
+    searchButton.addEventListener('click', () => {
+        const searchDate = document.getElementById('search-date').value;
+        const logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
+        const result = logs.find(log => log.date === searchDate);
 
-    fetchLogs();
-});
-
-document.getElementById('health-log-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const date = document.getElementById('date').value;
-    const condition = document.getElementById('condition').value;
-    const motivation = document.getElementById('motivation').value;
-    const notes = document.getElementById('notes').value;
-    
-    const entry = document.createElement('li');
-    entry.innerHTML = `<strong>${date}</strong> - 体調: ${condition}, モチベーション: ${motivation}<br>${notes}`;
-    
-    document.getElementById('entries-list').appendChild(entry);
-    
-    // フォームをリセット
-    document.getElementById('health-log-form').reset();
-    
-    // グラフデータに追加
-    addDataToChart(date, condition, motivation);
-
-    // データベースに保存
-    saveLog(date, condition, motivation, notes);
-});
-
-const healthData = {
-    labels: [],
-    datasets: [{
-        label: '体調',
-        data: [],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-    }, {
-        label: 'モチベーション',
-        data: [],
-        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-        borderColor: 'rgba(153, 102, 255, 1)',
-        borderWidth: 1
-    }]
-};
-
-const ctx = document.getElementById('healthChart').getContext('2d');
-const healthChart = new Chart(ctx, {
-    type: 'line',
-    data: healthData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value) {
-                        const conditions = ['悪い', '普通', '良い'];
-                        return conditions[value];
-                    }
-                }
-            }
+        if (result) {
+            searchResults.innerHTML = `
+                <p>日付: ${result.date}</p>
+                <p>体調: ${result.condition}</p>
+                <p>モチベーション: ${result.motivation}</p>
+                <p>メモ: ${result.notes}</p>
+            `;
+        } else {
+            searchResults.innerHTML = '<p>データが見つかりませんでした。</p>';
         }
+    });
+
+    function displayLogs() {
+        const logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
+        entriesList.innerHTML = logs.map(log => `
+            <li>
+                <p>日付: ${log.date}</p>
+                <p>体調: ${log.condition}</p>
+                <p>モチベーション: ${log.motivation}</p>
+                <p>メモ: ${log.notes}</p>
+            </li>
+        `).join('');
     }
+
+    displayLogs();
 });
 
-function addDataToChart(date, condition, motivation) {
-    const conditionValues = {
-        '悪い': 0,
-        '普通': 1,
-        '良い': 2
-    };
-    
-    const motivationValues = {
-        '低い': 0,
-        '普通': 1,
-        '高い': 2
-    };
-    
-    healthData.labels.push(date);
-    healthData.datasets[0].data.push(conditionValues[condition]);
-    healthData.datasets[1].data.push(motivationValues[motivation]);
-    healthChart.update();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const entriesList = document.getElementById('entries-list');
+    const searchButton = document.getElementById('search-button');
+    const searchResults = document.getElementById('search-results');
 
-function saveLog(date, condition, motivation, notes) {
-    fetch('/api/logs', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ date, condition, motivation, notes })
+    // ローカルストレージからデータを取得して表示する関数
+    function displayLogs() {
+        const logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
+        entriesList.innerHTML = logs.map(log => `
+            <li>
+                <p>日付: ${log.date}</p>
+                <p>体調: ${log.condition}</p>
+                <p>モチベーション: ${log.motivation}</p>
+                <p>メモ: ${log.notes}</p>
+            </li>
+        `).join('');
+    }
+
+    // 検索ボタンのクリックイベントリスナー
+    searchButton.addEventListener('click', () => {
+        const searchDate = document.getElementById('search-date').value;
+        const logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
+        const result = logs.find(log => log.date === searchDate);
+
+        if (result) {
+            searchResults.innerHTML = `
+                <p>日付: ${result.date}</p>
+                <p>体調: ${result.condition}</p>
+                <p>モチベーション: ${result.motivation}</p>
+                <p>メモ: ${result.notes}</p>
+            `;
+        } else {
+            searchResults.innerHTML = '<p>データが見つかりませんでした。</p>';
+        }
     });
-}
 
-function fetchLogs() {
-    fetch('/api/logs')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(log => {
-                const entry = document.createElement('li');
-                entry.innerHTML = `<strong>${log.date}</strong> - 体調: ${log.condition}, モチベーション: ${log.motivation}<br>${log.notes}`;
-                document.getElementById('entries-list').appendChild(entry);
-                addDataToChart(log.date, log.condition, log.motivation);
-            });
-        });
-}
+    // ページ読み込み時にログを表示
+    displayLogs();
+});

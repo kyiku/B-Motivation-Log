@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体調管理の振り返り</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>振り返り</h1>
+    </header>
+    <main>
+        <section id="log-entries">
+            <h2>過去の記録</h2>
+            <ul id="entries-list">
+                <!-- JavaScriptでログをここに追加 -->
+            </ul>
+        </section>
+        <section id="log-chart">
+            <h2>一年の体調グラフ</h2>
+            <canvas id="healthChart"></canvas>
+        </section>
+        <section id="search-section">
+            <h2>データ検索</h2>
+            <form id="search-form">
+                <label for="search-date">日付で検索:</label>
+                <input type="date" id="search-date" name="search-date">
+                <button type="button" id="search-button">検索</button>
+            </form>
+            <div id="search-results"></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

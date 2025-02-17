@@ -1,0 +1,17 @@
+{
+  "name": "b-motivation-log",
+  "version": "1.0.0",
+  "description": "- ユーザー：開発メンバーが使用する。   - プロダクトゴール：体調管理ができるアプリの開発   - 必須機能：体調管理、日誌、振り返り",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2"
+  }
+}
