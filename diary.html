@@ -4,99 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日誌の入力</title>
-    <script src="diary.js" defer></script>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(to bottom, #FFC0CB, #FFB6C1);
+            font-family: Arial, sans-serif;
+            background-color: #e0f7e0;
             margin: 0;
-            padding: 0;
-            padding-top: 20px; /* 上部に余白を追加 */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* 上部に配置 */
-            height: 100vh;
-        }
-
-        h1 {
-            color: #FF69B4;
-            font-size: 2.5em;
-            margin-bottom: 20px; /* 下に余白を追加 */
-        }
-
-        form {
-            background-color: #FFE4E1;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            border: 2px solid #FFB6C1;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #FF69B4;
-            width: 100%;
+            color: #2e7d32;
         }
 
         input[type="date"],
         input[type="text"],
         textarea,
         select {
-            width: calc(100% - 20px);
+            width: 100%;
             padding: 10px;
             margin-bottom: 20px;
-            border: 2px solid #FFB6C1;
-            border-radius: 10px;
-            background-color: #FFF0F5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
         textarea {
-            resize: none; /* テキストエリアのリサイズ機能を無効にする */
+            resize: vertical;
         }
 
         input[type="submit"] {
-            background-color: #FF69B4;
+            background-color: #4caf50;
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1em;
         }
 
         input[type="submit"]:hover {
-            background-color: #FF1493;
+            background-color: #388e3c;
         }
 
-        #weather {
-            margin-top: 20px;
-            text-align: center;
+        #entries-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        #weather h2 {
-            margin: 0;
-            font-size: 1.5em;
-            color: #FF69B4;
+        .entry {
+            background-color: #f1f8e9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        #weather p {
-            margin: 5px 0 0;
-            color: #FF69B4;
+        .entry h2 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        .entry p {
+            margin: 5px 0;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <form action="submit_diary.php" method="POST">
+    <form id="diary-form">
         <h1>日誌の入力</h1>
         <label for="date">日付:</label>
-        <input type="date" id="date" name="date" required><br><br>
+        <input type="date" id="date" name="date" required>
 
         <label for="weather">天気:</label>
         <select id="weather" name="weather" required>
@@ -104,15 +109,71 @@
             <option value="曇り">曇り</option>
             <option value="雨">雨</option>
             <option value="雪">雪</option>
-        </select><br><br>
+        </select>
 
         <label for="title">タイトル:</label>
-        <input type="text" id="title" name="title" required><br><br>
+        <input type="text" id="title" name="title" required>
 
-        <label for="diary_content">内容:</label><br>
-        <textarea id="diary_content" name="diary_content" rows="10" cols="50" placeholder="今日の出来事を記入してください..." required></textarea><br><br>
+        <label for="diary_content">内容:</label>
+        <textarea id="diary_content" name="diary_content" rows="10" placeholder="今日の出来事を記入してください..." required></textarea>
 
         <input type="submit" value="送信">
     </form>
-</body> 
+
+    <div id="entries-container">
+        <h2>過去の日誌</h2>
+        <div id="entries-list"></div>
+    </div>
+
+    <script>
+        document.getElementById('diary-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const date = document.getElementById('date').value;
+            const weather = document.getElementById('weather').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('diary_content').value;
+
+            const diaryEntry = {
+                date,
+                weather,
+                title,
+                content
+            };
+
+            let diaryEntries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+            diaryEntries.push(diaryEntry);
+            localStorage.setItem('diaryEntries', JSON.stringify(diaryEntries));
+
+            alert('日誌が保存されました');
+            document.getElementById('diary-form').reset();
+            displayEntries();
+        });
+
+        function displayEntries() {
+            const entriesList = document.getElementById('entries-list');
+            const diaryEntries = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+
+            entriesList.innerHTML = '';
+
+            if (diaryEntries.length === 0) {
+                entriesList.innerHTML = '<p>保存された日誌がありません。</p>';
+            } else {
+                diaryEntries.forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'entry';
+                    entryDiv.innerHTML = `
+                        <h2>${entry.title}</h2>
+                        <p><strong>日付:</strong> ${entry.date}</p>
+                        <p><strong>天気:</strong> ${entry.weather}</p>
+                        <p>${entry.content}</p>
+                    `;
+                    entriesList.appendChild(entryDiv);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', displayEntries);
+    </script>
+</body>
 </html>
