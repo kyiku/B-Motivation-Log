@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体調管理の振り返り</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>振り返り</h1>
+    </header>
+    <main>
+        <section id="log-form">
+            <h2>今日の体調を記録する</h2>
+            <form id="health-log-form">
+                <label for="date">日付:</label>
+                <input type="date" id="date" name="date" required>
+                
+                <label for="condition">体調:</label>
+                <select id="condition" name="condition" required>
+                    <option value="良い">良い</option>
+                    <option value="普通">普通</option>
+                    <option value="悪い">悪い</option>
+                </select>
+                
+                <label for="motivation">モチベーション:</label>
+                <select id="motivation" name="motivation" required>
+                    <option value="高い">高い</option>
+                    <option value="普通">普通</option>
+                    <option value="低い">低い</option>
+                </select>
+                
+                <label for="notes">メモ:</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+                
+                <button type="submit">記録する</button>
+            </form>
+        </section>
+        <section id="log-entries">
+            <h2>過去の記録</h2>
+            <ul id="entries-list">
+                <!-- JavaScriptでログをここに追加 -->
+            </ul>
+        </section>
+        <section id="log-chart">
+            <h2>一年の体調グラフ</h2>
+            <canvas id="healthChart"></canvas>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>s
