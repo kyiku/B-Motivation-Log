@@ -48,6 +48,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     menu.appendChild(topButton);
 
+    const site0Button = document.createElement('button');
+        site0Button.textContent = '体調管理';
+        site0Button.style.display = 'block';
+        site0Button.style.marginBottom = '10px';
+        site0Button.addEventListener('click', function() {
+            window.location.href = './physical-management-page.html';
+        });
+        menu.appendChild(site0Button);
+
     const site1Button = document.createElement('button');
     site1Button.textContent = '日誌';
     site1Button.style.display = 'block';
