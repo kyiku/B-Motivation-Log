@@ -1,23 +1,69 @@
-#unwell-data{
-    display: none;
+h1 {
+    font-size:45px;
+    background-color: rgb(192, 247, 175);
+    width: 100vw; /* 幅を画面全体に設定 */
+    margin: 0; /* マージンをリセット */
+    padding: 10px 20px; /* 上下と左右のパディングを追加 */
+    box-sizing: border-box; /* パディングを含めて幅を計算 */
+    background-image: linear-gradient(to left, #60ffdd 0%, #d7fef7 100%);
+    border-bottom: 20px solid linear-gradient(to left, #8ea17e 0%, #004636 100%);/* 下側に薄いラインを追加 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
     flex-direction: column;
-}
 
-#unwell-data label {
-    vertical-align: top;
-}
-
-#reason-unwell {
-    resize: vertical;
-    overflow: auto;
+    background-color:  #bfeded;
 }
 
 .form-container {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
-    max-width: 300px;
-    margin: right;
+    max-width: 800px;
+    width: 100%;
+    margin: 80px 0 0 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #d6fff7;
+}
+
+.form-container label {
+    flex: 0 0 200px;
+    margin-right: 10px;
+    font-size: 24px;
+    text-align: left;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 24px;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    font-size: 24px;
+    align-self: flex-start;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
 }
