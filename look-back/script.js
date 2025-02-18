@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 検索ボタンのクリックイベントリスナー
     searchButton.addEventListener('click', () => {
-        const searchDate = document.getElementById('search-date').value;
+        const searchDate = document.getElementById('date').value;
         const logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
         const result = logs.find(log => log.date === searchDate);
 
