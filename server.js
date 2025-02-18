@@ -15,7 +15,9 @@ app.post('/submit', (req, res) => {
         date: req.body.date,
         temperature: req.body.temperature,
         condition: req.body.condition,
-        reasonUnwell: req.body['reason-unwell']
+        reasonUnwell: req.body['reason-unwell'],
+        motivation: req.body.motivation,
+        notes: req.body.notes
     };
 
     fs.appendFile('data.json', JSON.stringify(data) + '\n', (err) => {

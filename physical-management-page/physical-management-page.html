@@ -36,8 +36,24 @@
                 <textarea id="reason-unwell" rows="1" cols="30"
                     placeholder="頭が痛い、咳が出るなど..."></textarea>
             </div>
-            <button type="submit">送信</button>
         </div>
+        <div class="motivation">
+            <div class="select-motivatoin">
+                <label for="motivation">モチベーション:</label>
+                <select id="motivation" name="motivation">
+                    <option value="good">良い</option>
+                    <option value="normal">普通</option>
+                    <option value="bad">悪い</option>
+                </select>
+            </div>
+            <div id="notes">
+                <label for="notes">メモ:</label>
+                <textarea id="notes-data" rows="3" cols="30"
+                    placeholder="今日はランニングをした、など..."></textarea>
+            </div>
+        </div>
+
+        <button type="submit">送信</button>
     </form>
 </body>
 
