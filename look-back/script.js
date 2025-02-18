@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = document.getElementById('date').value;
         const motivation = document.getElementById('motivation').value;
         const notes = document.getElementById('notes').value;
+        const reasonUnwell = document.getElementById('reason-unwell').value;
 
         const data = {
             date,
             condition,
             motivation,
-            notes
+            notes,
+            reasonUnwell: condition === "bad" ? reasonUnwell : ""
         };
 
         let logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>体調: ${result.condition}</p>
                 <p>モチベーション: ${result.motivation}</p>
                 <p>メモ: ${result.notes}</p>
+                ${result.condition === "bad" && result.reasonUnwell ? `<p>体調不良の理由: ${result.reasonUnwell}</p>` : ""}
             `;
         } else {
             searchResults.innerHTML = '<p>データが見つかりませんでした。</p>';
@@ -53,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>体調: ${log.condition}</p>
                 <p>モチベーション: ${log.motivation}</p>
                 <p>メモ: ${log.notes}</p>
+                ${log.condition === "bad" && log.reasonUnwell ? `<p>体調不良の理由: ${log.reasonUnwell}</p>` : ""}
             </li>
         `).join('');
     }
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>体調: ${log.condition}</p>
                 <p>モチベーション: ${log.motivation}</p>
                 <p>メモ: ${log.notes}</p>
+                ${log.condition === "bad" && log.reasonUnwell ? `<p>体調不良の理由: ${log.reasonUnwell}</p>` : ""}
             </li>
         `).join('');
     }
@@ -90,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>体調: ${result.condition}</p>
                 <p>モチベーション: ${result.motivation}</p>
                 <p>メモ: ${result.notes}</p>
+                ${result.condition === "bad" && result.reasonUnwell ? `<p>体調不良の理由: ${result.reasonUnwell}</p>` : ""}
             `;
         } else {
             searchResults.innerHTML = '<p>データが見つかりませんでした。</p>';
