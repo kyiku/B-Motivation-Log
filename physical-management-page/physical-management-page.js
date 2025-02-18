@@ -25,12 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const temperature = document.getElementById('temperature').value;
         const condition = document.getElementById('condition').value;
         const reasonUnwell = document.getElementById('reason-unwell').value;
+        const motivation = document.getElementById('motivation').value;
+        const notes = document.getElementById('notes-data').value;
 
         const data = {
             date,
             temperature,
             condition,
-            reasonUnwell
+            reasonUnwell,
+            motivation,
+            notes
         };
 
         let logs = JSON.parse(localStorage.getItem('healthLogs')) || [];
