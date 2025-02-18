@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         site0Button.style.display = 'block';
         site0Button.style.marginBottom = '10px';
         site0Button.addEventListener('click', function() {
-            window.location.href = './physical-management-page/physical-management-page.html';
+            window.location.href = '../physical-management-page/physical-management-page.html';
         });
         menu.appendChild(site0Button);
 
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     site1Button.style.display = 'block';
     site1Button.style.marginBottom = '10px';
     site1Button.addEventListener('click', function() {
-        window.location.href = '../diary.html';
+        window.location.href = '../diary/diary.html';
     });
     menu.appendChild(site1Button);
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
     site2Button.textContent = '振り返り';
     site2Button.style.display = 'block';
     site2Button.addEventListener('click', function() {
-        window.location.href = '../look-back.html';
+        window.location.href = '../look-back/look-back.html';
     });
     menu.appendChild(site2Button);
 
