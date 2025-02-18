@@ -8,12 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 三点リーダーとメニューの作成
     const menuButton = document.createElement('div');
-    menuButton.innerHTML = '・・・'; // 三点リーダー
-    menuButton.style.position = 'fixed';
-    menuButton.style.top = '10px';
-    menuButton.style.right = '10px';
-    menuButton.style.cursor = 'pointer';
-    menuButton.style.fontSize = '30px';
+    menuButton.innerHTML = ''; // 三点リーダー
+    menuButton.classList.add('menu-button');
     document.body.appendChild(menuButton);
 
     const menu = document.createElement('div');

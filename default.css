@@ -1,0 +1,25 @@
+.menu-button {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #333;
+    line-height: 1;
+    width: 0.25em;
+    height: 0.25em;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: -0.5em 0 0 0 currentColor, 0.5em 0 0 0 currentColor;
+}
+.menu-button::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: transparent; /* 🔹 見た目は変えずにクリック範囲を拡張 */
+}
