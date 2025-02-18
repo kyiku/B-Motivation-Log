@@ -23,3 +23,32 @@
     bottom: -10px;
     background: transparent; /* 🔹 見た目は変えずにクリック範囲を拡張 */
 }
+
+.menu {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none; /* 初期状態では非表示 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 150px; /* メニューの幅 */
+    border-radius: 5px;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+}
+
+.menu button:hover {
+    background-color: #e0e0e0;
+}
