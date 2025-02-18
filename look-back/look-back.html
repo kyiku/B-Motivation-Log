@@ -6,7 +6,8 @@
     <title>体調管理の振り返り</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <script src="../default.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -27,12 +28,11 @@
             <h2>データ検索</h2>
             <form id="search-form">
                 <label for="search-date">日付で検索:</label>
-                <input type="date" id="search-date" name="search-date">
+                <input type="date" id="date" name="search-date">
                 <button type="button" id="search-button">検索</button>
             </form>
             <div id="search-results"></div>
         </section>
     </main>
-    <script src="script.js"></script>
 </body>
 </html>
